@@ -4,30 +4,24 @@
 
 layout: default
 ---
-# Welcome to My Blog
+# WebXR.NL
 
-## Recent Posts
+{%- if site.posts.size > 0 -%}
 
-<div class="home">
-    {%- if site.posts.size > 0 -%}
-        <ul class="post-list">
-            {%- for post in site.posts limit:10 -%}
-            <li>
-                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-                <h3>
-                    <a class="post-link" href="{{ post.url | relative_url }}">
-                        {{ post.title | escape }}
-                    </a>
-                </h3>
-                {%- if post.excerpt -%}
-                    <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 50 }}</p>
-                {%- endif -%}
-            </li>
-            {%- endfor -%}
-        </ul>
+{% for post in site.posts limit:10 %}
 
-        <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
-    {%- else -%}
-        <p>No posts yet. Check back soon!</p>
-    {%- endif -%}
-</div>
+## [{{ post.title | escape }}]({{ post.url | relative_url }})
+
+### {{ post.date | date: "%b %-d, %Y" }}
+
+  {{ post.content }}
+
+{% endfor %}
+
+[Subscribe via RSS]({{ "/feed.xml" | relative_url }})
+
+{%- else -%}
+
+No posts yet. Check back soon!
+
+{%- endif -%}
