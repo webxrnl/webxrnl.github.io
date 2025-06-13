@@ -1,0 +1,19 @@
+{
+    "name": "webxrnl.github.io",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "bundle exec jekyll serve --livereload --incremental --open-url"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/webxrnl/webxrnl.github.io.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/webxrnl/webxrnl.github.io/issues"
+    },
+    "homepage": "https://github.com/webxrnl/webxrnl.github.io#readme",
+    "description": ""
+}
