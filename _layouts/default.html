@@ -11,9 +11,45 @@
     <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
     <p>{{ site.description }}</p>
   </header>
-  <main class="home">
-    {{ content }}
-  </main>
+  <div class="page-layout">
+    <aside class="sidebar">
+      <h2>Next WebXR Discord Meetup</h2>
+      {% assign now = 'now' | date: '%Y-%m-%d' | to_date %}
+      {% assign sorted_meetups = site.data.meetups | sort %}
+      {% assign next_meetup = nil %}
+      {% for date in sorted_meetups %}
+        {% if date | to_date > now and next_meetup == nil %}
+          {% assign next_meetup = date %}
+        {% endif %}
+      {% endfor %}
+      {% if next_meetup %}
+        {% assign meetup_date = next_meetup | to_date %}
+        {% assign day = meetup_date | date: '%-d' %}
+        {% assign day_last = day | slice: -1, 1 %}
+        {% if day == '11' or day == '12' or day == '13' %}
+          {% assign suffix = 'th' %}
+        {% elsif day_last == '1' %}
+          {% assign suffix = 'st' %}
+        {% elsif day_last == '2' %}
+          {% assign suffix = 'nd' %}
+        {% elsif day_last == '3' %}
+          {% assign suffix = 'rd' %}
+        {% else %}
+          {% assign suffix = 'th' %}
+        {% endif %}
+        <p><strong>Date:</strong> {{ meetup_date | date: '%B' }} {{ day }}{{ suffix }}, {{ meetup_date | date: '%Y' }}</p>
+        <p>Join through the WebXR Discord</p>
+      {% else %}
+        <p><strong>Date:</strong> No upcoming meetups</p>
+      {% endif %}
+      <h2>Community</h2>
+      <p><a href="https://discord.gg/webxr" target="_blank" rel="noopener">WebXR Discord</a></p>
+      <p><a href="https://www.meetup.com/webxrnl" target="_blank" rel="noopener">WebXR Meetup</a></p>
+    </aside>
+    <main class="home main-content">
+      {{ content }}
+    </main>
+  </div>
   <footer>
     <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
   </footer>
